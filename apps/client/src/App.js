@@ -29,7 +29,7 @@ const MapPin = ({ className }) => <svg xmlns="http://www.w3.org/2000/svg" width=
 // --- CONFIGURATION FIREBASE (À MIGRER VERS SUPABASE) ---
 const firebaseConfig = {
     // Audit Sécurité : Ces clés seront déplacées vers des variables d'environnement
-    apiKey: "AIzaSyBZDyGiT7698jJuY57hkgj8Xy3qhS_hitI",
+    apiKey: process.env.REACT_APP_GOOGLE_PLACES_API_KEY,
     authDomain: "carnet-culinaire.firebaseapp.com",
     projectId: "carnet-culinaire",
     storageBucket: "carnet-culinaire.appspot.com",
@@ -37,11 +37,11 @@ const firebaseConfig = {
     appId: "1:306027327689:web:347e355216ad9cd7805d18"
 };
 
-// --- INITIALISATION DES SERVICES ---
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
+// --- INITIALISATION DES SERVICES (OBSOLÈTE - PASSAGE À SUPABASE) ---
+// const app = initializeApp(firebaseConfig);
+// const auth = getAuth(app);
+// const db = getFirestore(app);
+// const storage = getStorage(app);
 
 // --- COMPOSANT PRINCIPAL DE L'APPLICATION ---
 export default function App() {
@@ -142,12 +142,12 @@ const MainApp = ({ user }) => {
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 {view === 'critiques' ? 
                     <CritiquesView 
-                        userId={user.uid} 
+                        userId={user.id} 
                         critiqueToOpen={critiqueToOpen}
                         clearCritiqueToOpen={clearCritiqueToOpen}
                     /> : 
                     <WishlistView 
-                        userId={user.uid} 
+                        userId={user.id} 
                         onConvertToCritique={openCritiqueFromWishlist}
                     />
                 }
@@ -408,7 +408,7 @@ const CritiqueModal = ({ critique, onClose, userId }) => {
     }
     
     const handleSearch = async () => {
-        if (!searchQuery.trim() || !PLACES_API_KEY || PLACES_API_KEY === "VOTRE_CLE_API_ICI") {
+        if (!searchQuery.trim() || !API_KEY || API_KEY === "VOTRE_CLE_API_ICI") {
             setSearchError("Veuillez entrer une recherche et configurer votre clé API.");
             return;
         }
@@ -423,7 +423,7 @@ const CritiqueModal = ({ critique, onClose, userId }) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Goog-Api-Key': PLACES_API_KEY,
+                    'X-Goog-Api-Key': API_KEY,
                     'X-Goog-FieldMask': 'places.displayName,places.formattedAddress,places.id'
                 },
                 body: JSON.stringify({ textQuery: searchQuery, languageCode: 'fr' })
@@ -455,7 +455,7 @@ const CritiqueModal = ({ critique, onClose, userId }) => {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Goog-Api-Key': PLACES_API_KEY,
+                    'X-Goog-Api-Key': API_KEY,
                     'X-Goog-FieldMask': 'types,internationalPhoneNumber,websiteUri,priceLevel,photos'
                 }
             });
@@ -464,7 +464,7 @@ const CritiqueModal = ({ critique, onClose, userId }) => {
             if (!response.ok) throw new Error(data.error?.message || `Erreur ${response.status}`);
 
             const budgetMap = { PRICE_LEVEL_INEXPENSIVE: '€', PRICE_LEVEL_MODERATE: '€€', PRICE_LEVEL_EXPENSIVE: '€€€', PRICE_LEVEL_VERY_EXPENSIVE: '€€€€' };
-            const photoUrl = data.photos?.[0]?.name ? `https://places.googleapis.com/v1/${data.photos[0].name}/media?maxHeightPx=800&key=${PLACES_API_KEY}` : '';
+            const photoUrl = data.photos?.[0]?.name ? `https://places.googleapis.com/v1/${data.photos[0].name}/media?maxHeightPx=800&key=${API_KEY}` : '';
 
             const foundType = data.types?.find(t => t.includes('food') || t.includes('restaurant'));
             const finalCuisineType = foundType ? foundType.replace(/_/g, ' ').replace('restaurant', '').trim() : '';
@@ -727,7 +727,7 @@ const WishlistManualAdd = ({ onAddWish }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [isSearching, setIsSearching] = useState(false);
-    const API_KEY = "AIzaSyBZDyGiT7698jJuY57hkgj8Xy3qhS_hitI";
+    const API_KEY = process.env.REACT_APP_GOOGLE_PLACES_API_KEY;
 
     const handleSearch = useCallback(async (query) => {
         if (!query.trim()) {
@@ -779,7 +779,7 @@ const WishlistManualAdd = ({ onAddWish }) => {
     );
 };
 const DiscoveryMode = ({ userId, onExit, existingWishlist, addWish }) => {
-    const API_KEY = "AIzaSyBZDyGiT7698jJuY57hkgj8Xy3qhS_hitI";
+    const API_KEY = process.env.REACT_APP_GOOGLE_PLACES_API_KEY;
     const [mode, setMode] = useState('boussole');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
