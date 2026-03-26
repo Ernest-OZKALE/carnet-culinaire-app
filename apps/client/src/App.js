@@ -16,7 +16,7 @@ const Trash2 = ({ className }) => <svg xmlns="http://www.w3.org/2000/svg" width=
 const Search = ({ className }) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>;
 const Loader2 = ({ className }) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>;
 const ChevronDown = ({ className }) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="6 9 12 15 18 9"></polyline></svg>;
-const Camera = ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>;
+// const Camera = ({className}) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>;
 const LogOut = ({ className }) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>;
 const GoogleIcon = () => <svg className="w-5 h-5" viewBox="0 0 48 48"><path fill="#4285F4" d="M43.611,20.083H24v8.53h11.303c-1.649,4.657-6.08,8.12-11.303,8.12c-8.749,0-15.842-7.092-15.842-15.842s7.093-15.842,15.842-15.842c4.761,0,9.045,1.94,12.079,5.022l6.59-6.59C39.203,3.545,32.135,0,24,0C10.75,0,0,10.75,0,24s10.75,24,24,24c12.438,0,23.023-9.25,23.023-23.023c0-1.583-0.16-3.125-0.412-4.583H43.611z"></path></svg>;
 const Sparkles = ({ className }) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M9.93 2.07a2 2 0 0 1 4.14 0l.53 1.6a.5.5 0 0 0 .4.4l1.6.53a2 2 0 0 1 0 4.14l-1.6.53a.5.5 0 0 0-.4.4l-.53 1.6a2 2 0 0 1-4.14 0l-.53-1.6a.5.5 0 0 0-.4-.4l-1.6-.53a2 2 0 0 1 0-4.14l1.6-.53a.5.5 0 0 0 .4-.4zM4.5 14.5a2 2 0 0 1 0-4.14l1.6-.53a.5.5 0 0 0 .4-.4l.53-1.6a2 2 0 0 1 4.14 0l.53 1.6a.5.5 0 0 0 .4.4l1.6.53a2 2 0 0 1 0 4.14l-1.6.53a.5.5 0 0 0-.4.4l-.53 1.6a2 2 0 0 1-4.14 0l-.53-1.6a.5.5 0 0 0-.4-.4z"/></svg>;
@@ -27,6 +27,7 @@ const MapPin = ({ className }) => <svg xmlns="http://www.w3.org/2000/svg" width=
 
 
 // --- CONFIGURATION FIREBASE (À MIGRER VERS SUPABASE) ---
+/* 
 const firebaseConfig = {
     // Audit Sécurité : Ces clés seront déplacées vers des variables d'environnement
     apiKey: process.env.REACT_APP_GOOGLE_PLACES_API_KEY,
@@ -36,6 +37,7 @@ const firebaseConfig = {
     messagingSenderId: "306027327689",
     appId: "1:306027327689:web:347e355216ad9cd7805d18"
 };
+*/
 
 // --- INITIALISATION DES SERVICES (OBSOLÈTE - PASSAGE À SUPABASE) ---
 // const app = initializeApp(firebaseConfig);
@@ -830,7 +832,7 @@ const DiscoveryMode = ({ userId, onExit, existingWishlist, addWish }) => {
             navigator.geolocation.getCurrentPosition( (position) => { findNearbyRestaurants({ latitude: position.coords.latitude, longitude: position.coords.longitude }); }, () => { setError("Impossible d'obtenir votre position."); });
         }
     };
-    const findAiSuggestions = useCallback(async () => { /* Logic from previous version */ }, [userId, API_KEY, existingWishlistNames]);
+    const findAiSuggestions = useCallback(async () => { /* Logic from previous version */ }, []);
     const addToWishlist = async (suggestion) => { setIsAdded(prev => ({ ...prev, [suggestion.id]: true })); await addWish(suggestion); };
     const handleRunDiscovery = () => { if (mode === 'boussole') handleSearchFromLocation(); if (mode === 'radar') findAiSuggestions(); };
 
@@ -921,6 +923,7 @@ const PillButtonSelector = ({ label, name, options, value, onChange, isIcon=fals
         </div>
     </div>
 );
+/*
 const DynamicTagInput = ({ label, tags, onTagsChange }) => {
     const [inputValue, setInputValue] = useState('');
     const handleKeyDown = (e) => {
@@ -957,6 +960,7 @@ const DynamicTagInput = ({ label, tags, onTagsChange }) => {
         </div>
     );
 };
+*/
 const FlavorRadarChart = React.memo(({ data, onUpdate }) => {
     if (typeof window === 'undefined' || !window.Recharts) {
         return (
@@ -1109,8 +1113,8 @@ const getNewMealItem = () => ({
 const _MealAnalysisCard = ({ initialItem, index, onItemChange, onRemoveItem }) => {
     const [item, setItem] = useState(initialItem);
     
-    const debouncedUpdate = useCallback(
-        window._.debounce((updatedItem) => {
+    const debouncedUpdate = useMemo(
+        () => window._.debounce((updatedItem) => {
           onItemChange(index, updatedItem);
         }, 500),
         [index, onItemChange]
