@@ -1,0 +1,14 @@
+{
+  "name": "carnet-culinaire-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "infrastructure/*",
+    "scripts/*"
+  ],
+  "scripts": {
+    "client:start": "npm start -w apps/client",
+    "client:build": "npm run build -w apps/client",
+    "infra:deploy": "echo 'Déploiement infrastructure non configuré'"
+  }
+}
