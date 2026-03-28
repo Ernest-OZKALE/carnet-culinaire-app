@@ -6,7 +6,8 @@ const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
 const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-// --- CONFIGURATION FIREBASE (SUPPRIMÉE) ---
+
+// --- INITIALISATION DE L'APPLICATION (MODE SUPABASE) ---
 
 // --- INLINE SVG ICONS ---
 const PlusCircle = ({ className }) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>;
@@ -26,24 +27,7 @@ const BrainCircuit = ({ className }) => <svg xmlns="http://www.w3.org/2000/svg" 
 const MapPin = ({ className }) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>;
 
 
-// --- CONFIGURATION FIREBASE (À MIGRER VERS SUPABASE) ---
-/* 
-const firebaseConfig = {
-    // Audit Sécurité : Ces clés seront déplacées vers des variables d'environnement
-    apiKey: process.env.REACT_APP_GOOGLE_PLACES_API_KEY,
-    authDomain: "carnet-culinaire.firebaseapp.com",
-    projectId: "carnet-culinaire",
-    storageBucket: "carnet-culinaire.appspot.com",
-    messagingSenderId: "306027327689",
-    appId: "1:306027327689:web:347e355216ad9cd7805d18"
-};
-*/
 
-// --- INITIALISATION DES SERVICES (OBSOLÈTE - PASSAGE À SUPABASE) ---
-// const app = initializeApp(firebaseConfig);
-// const auth = getAuth(app);
-// const db = getFirestore(app);
-// const storage = getStorage(app);
 
 // --- COMPOSANT PRINCIPAL DE L'APPLICATION ---
 export default function App() {
